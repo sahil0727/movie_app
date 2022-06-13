@@ -3,12 +3,13 @@ class Movie {
   final int id, year, numOfRating, criticsReview, metaScoreRating;
   final double rating;
   final List<String> generation;
-  final String plot, title, poster, backdrop;
+  final String plot, title, poster, backdrop, runTime;
   final List<Map<String, String>> cast;
 
   Movie({
     required this.poster,
     required this.backdrop,
+    required this.runTime,
     required this.title,
     required this.id,
     required this.year,
@@ -33,6 +34,7 @@ List<Movie> movies = [
     criticsReview: 50,
     metaScoreRating: 76,
     rating: 7.3,
+    runTime: '1h 49min',
     generation: [
       'Action',
       'Drama',
@@ -71,6 +73,7 @@ List<Movie> movies = [
     criticsReview: 68,
     metaScoreRating: 98,
     rating: 8.2,
+    runTime: '2h 32min',
     generation: ['Action', 'Biography', 'Drama'],
     plot: plotText,
     cast: [
@@ -106,6 +109,7 @@ List<Movie> movies = [
     criticsReview: 48,
     metaScoreRating: 85,
     rating: 7.9,
+    runTime: '1h 42min',
     generation: ['Action', 'Drama'],
     plot: plotText,
     cast: [

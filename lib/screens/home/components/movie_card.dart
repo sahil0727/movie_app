@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,57 +15,53 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding * 1.2),
-      child: GestureDetector(
-        onTap: () => Future.delayed(
-            const Duration(microseconds: 1200),
-            () => Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => DetailsScreen(movie: movie),
-                  ),
-                )),
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50),
-                  image: DecorationImage(
-                    fit: BoxFit.fill,
-                    image: AssetImage(movie.poster),
-                  ),
-                ),
+      child: OpenContainer(
+        closedBuilder: (context, action) => buildMovieCard(context),
+        openBuilder: (context, action) => DetailsScreen(movie: movie),
+      ),
+    );
+  }
+
+  Column buildMovieCard(BuildContext context) {
+    return Column(
+      children: [
+        Expanded(
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage(movie.poster),
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5),
-              child: Text(
-                movie.title,
-                style: GoogleFonts.adamina(
-                  color: Colors.black45,
-                  fontSize: 25,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: kDefaultPadding * 0.5),
+          child: Text(
+            movie.title,
+            style: GoogleFonts.adamina(
+              color: Colors.black45,
+              fontSize: 25,
+              fontWeight: FontWeight.w500,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SvgPicture.asset(
-                  'assets/icons/star_fill.svg',
-                  height: 20,
-                ),
-                const SizedBox(width: 10),
-                Text(
-                  movie.rating.toString(),
-                  style: GoogleFonts.acme(),
-                ),
-              ],
+          ),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(
+              'assets/icons/star_fill.svg',
+              height: 20,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              movie.rating.toString(),
+              style: GoogleFonts.acme(),
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }
